@@ -1,10 +1,15 @@
 import { createTheme, Paper, ThemeProvider, Typography } from '@mui/material'
 import React, { useMemo } from 'react'
-import { NavigationPanel } from 'src/components'
+import { NavigationPanel, Tree } from 'src/components'
 import { defaultOptions } from 'src/theme'
 import AccountTreeOutlinedIcon from '@mui/icons-material/AccountTreeOutlined'
 import { useTranslation } from 'react-i18next'
-import { selectThemeMode, ToggleLocale, ToggleTheme } from 'src/features'
+import {
+  selectThemeMode,
+  ToggleLocale,
+  ToggleTheme,
+  TreeControl,
+} from 'src/features'
 import { useAppSelector } from 'src/hooks'
 import { LayoutsStyled } from './style'
 
@@ -39,7 +44,7 @@ export const Layouts = () => {
             <ToggleTheme />
           </NavigationPanel.Right>
         </NavigationPanel>
-        <Paper elevation={1} />
+        <TreeControl />
       </LayoutsStyled>
     </ThemeProvider>
   )
