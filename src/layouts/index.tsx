@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider, Typography } from '@mui/material'
+import { createTheme, Paper, ThemeProvider, Typography } from '@mui/material'
 import React, { useMemo } from 'react'
 import { NavigationPanel } from 'src/components'
 import { defaultOptions } from 'src/theme'
@@ -39,6 +39,7 @@ export const Layouts = () => {
             <ToggleTheme />
           </NavigationPanel.Right>
         </NavigationPanel>
+        <Paper elevation={1} />
       </LayoutsStyled>
     </ThemeProvider>
   )

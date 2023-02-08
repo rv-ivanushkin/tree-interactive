@@ -20,11 +20,6 @@ const NavigationPanelStyled = styled('div')`
   align-items: center;
   gap: 10px;
   padding: 10px;
-  background: ${({ theme }) =>
-    theme.palette.mode === 'light'
-      ? theme.palette.grey[100]
-      : theme.palette.grey[900]};
-  border-bottom: 1px solid ${({ theme }) => theme.palette.divider};
 `
 
 export const NavigationPanel = Object.assign(NavigationPanelStyled, {
