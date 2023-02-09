@@ -17,7 +17,11 @@ export const Tree = ({
         connectorLineType={connectorLineType}
       >
         {treeData.map((node, index) => (
-          <TreeNode key={`_${index.toString()}_${node.id}`} node={node} />
+          <TreeNode
+            key={`_${index.toString()}_${node.id}`}
+            dense={dense}
+            node={node}
+          />
         ))}
       </TreeStyled>
     </TreeContainer>

@@ -1,5 +1,7 @@
 {
   "navigationPanel": {
     "title": "Tree - Интерактивный компонент Tree"
-  }
+  },
+  "connectorLineType": "Тип соединительной линии",
+  "dense": "Внутренний отступ"
 }

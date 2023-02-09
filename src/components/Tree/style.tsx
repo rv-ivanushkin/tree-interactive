@@ -67,10 +67,6 @@ export const TreeNodeHeaderStyled = styled(
   grid-auto-columns: auto 1fr;
   justify-items: start;
 
-  &.MuiButtonBase-root {
-    padding: 4px;
-  }
-
   & svg {
     transform: rotate(
       ${({ isShowChildren }) => (isShowChildren ? '90deg' : '0deg')}
@@ -84,14 +80,16 @@ export const TreeNodeCollapse = styled('div')`
 `
 
 export const TreeStyled = styled(
-  ({ connectorLineType, ...rest }: TreeProps & PaperProps) => (
+  ({ connectorLineType, dense, ...rest }: TreeProps & PaperProps) => (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Paper {...rest} />
   )
 )<TreeProps>`
   position: absolute;
   overflow-y: auto;
-  max-height: calc(100%);
+  overflow-x: auto;
+  height: calc(100%);
+  width: calc(100%);
   left: 0;
   right: 0;
   bottom: 0;

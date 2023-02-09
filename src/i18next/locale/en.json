@@ -1,5 +1,7 @@
 {
   "navigationPanel": {
     "title": "Tree - Interactive component Tree"
-  }
+  },
+  "connectorLineType": "Connector line type",
+  "dense": "Internal indentation"
 }
