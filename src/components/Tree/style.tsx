@@ -1,4 +1,5 @@
-import { Button, Paper, styled } from '@mui/material'
+import React from 'react'
+import { Button, ButtonProps, Paper, PaperProps, styled } from '@mui/material'
 import { TreeProps } from './types'
 
 export const TreeContainer = styled('div')`
@@ -47,7 +48,15 @@ export const TreeNodeStyled = styled('div')`
   }
 `
 
-export const TreeNodeHeaderStyled = styled(Button)<{
+export const TreeNodeHeaderStyled = styled(
+  ({
+    isShowChildren,
+    ...rest
+  }: {
+    isShowChildren?: boolean
+    // eslint-disable-next-line react/jsx-props-no-spreading
+  } & ButtonProps) => <Button {...rest} />
+)<{
   isShowChildren?: boolean
 }>`
   text-transform: none;
@@ -74,7 +83,12 @@ export const TreeNodeCollapse = styled('div')`
   padding-left: 25px;
 `
 
-export const TreeStyled = styled(Paper)<TreeProps>`
+export const TreeStyled = styled(
+  ({ connectorLineType, ...rest }: TreeProps & PaperProps) => (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Paper {...rest} />
+  )
+)<TreeProps>`
   position: absolute;
   overflow-y: auto;
   max-height: calc(100%);
