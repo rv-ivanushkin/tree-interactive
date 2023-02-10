@@ -20,7 +20,9 @@ export const TreeNode = ({ node, dense }: TreeNodeProps) => {
         disableRipple
         size={sizeButton}
       >
-        <ArrowRightRoundedIcon fontSize="small" color="action" />
+        {Boolean(node.children?.length) && (
+          <ArrowRightRoundedIcon fontSize="small" color="action" />
+        )}
         {node.label}
       </TreeNodeHeaderStyled>
       <TreeNodeCollapse>
@@ -28,7 +30,7 @@ export const TreeNode = ({ node, dense }: TreeNodeProps) => {
           node.children?.map((child, index) => (
             <TreeNode
               key={`_${index.toString()}_${child.id}`}
-              node={node}
+              node={child}
               dense={dense}
             />
           ))}

@@ -7,6 +7,7 @@ import { TreeProps } from './types'
 export const Tree = ({
   dense = false,
   connectorLineType = 'solid',
+  nodes,
 }: TreeProps) => {
   return (
     <TreeContainer>
@@ -15,7 +16,7 @@ export const Tree = ({
         variant="outlined"
         connectorLineType={connectorLineType}
       >
-        {treeData.map((node, index) => (
+        {nodes.map((node, index) => (
           <TreeNode
             key={`_${index.toString()}_${node.id}`}
             dense={dense}

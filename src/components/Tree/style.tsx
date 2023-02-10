@@ -82,7 +82,7 @@ export const TreeNodeCollapse = styled('div')`
 `
 
 export const TreeStyled = styled(
-  ({ connectorLineType, dense, ...rest }: TreeProps & PaperProps) => (
+  ({ connectorLineType, dense, ...rest }: TreeStyledProps & PaperProps) => (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Paper {...rest} />
   )

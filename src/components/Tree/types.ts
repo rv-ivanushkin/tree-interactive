@@ -1,7 +1,7 @@
 export type ConnectorLineTypes = 'solid' | 'dashed'
 export type Dense = boolean
 export type ConnectorLineType = ConnectorLineTypes
-
+export type TreeStyledProps = Omit<TreeProps, 'nodes'>
 export interface TreeNode {
   label: string
   id: string | number
@@ -16,4 +16,5 @@ export interface TreeNodeProps {
 export interface TreeProps {
   connectorLineType?: ConnectorLineType
   dense?: Dense
+  nodes: TreeNode[]
 }

@@ -10,11 +10,14 @@ import {
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ConnectorLineType, Tree } from 'src/components/Tree'
+import { genDataItems } from 'src/utils'
 import {
   OptionsStyled,
   TreeControlStyled,
   TreeOptionsControlStyled,
 } from './style'
+
+const nodes = genDataItems()
 
 export const TreeControl = () => {
   const { t } = useTranslation()
@@ -31,7 +34,7 @@ export const TreeControl = () => {
     <TreeControlStyled>
       <TextField size="small" label={t('filterPlaceholder')} />
       <div />
-      <Tree dense={dense} connectorLineType={connectorLineType} />
+      <Tree nodes={nodes} dense={dense} connectorLineType={connectorLineType} />
       <OptionsStyled>
         <Typography variant="h5">{t('optionsLabel')}</Typography>
         <Divider />
