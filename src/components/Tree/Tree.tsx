@@ -10,8 +10,48 @@ export const Tree = ({
   connectorLineType = 'solid',
   nodes: defaultNodes,
   filter = '',
+  isChecked = false,
+  checked: defaultChecked = [],
+  expanded: defaultExpanded = [],
+  onChecked,
+  onExpanded,
 }: TreeProps) => {
   const [nodes, setNodes] = useState(defaultNodes)
+  const [checked, setChecked] = useState<string[]>(defaultChecked)
+  const [expanded, setExpanded] = useState<string[]>(defaultExpanded)
+
+  useEffect(() => {
+    setChecked(defaultChecked)
+  }, [defaultChecked])
+
+  useEffect(() => {
+    setExpanded(defaultExpanded)
+  }, [defaultExpanded])
+
+  useEffect(() => {
+    if (onChecked) {
+      onChecked(checked)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [checked])
+
+  useEffect(() => {
+    if (onExpanded) {
+      onExpanded(expanded)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [expanded])
+
+  const contextValue = useMemo(
+    () => ({
+      checked,
+      setChecked,
+      expanded,
+      setExpanded,
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [checked, expanded]
+  )
 
   useEffect(() => {
     setNodes(filter ? filterNodesByKey(defaultNodes, filter) : defaultNodes)
@@ -25,13 +65,16 @@ export const Tree = ({
         variant="outlined"
         connectorLineType={connectorLineType}
       >
-        {nodes.map((node, index) => (
-          <TreeNode
-            key={`_${index.toString()}_${node.id}`}
-            dense={dense}
-            node={node}
-          />
-        ))}
+        <TreeContext.Provider value={contextValue}>
+          {nodes.map((node, index) => (
+            <TreeNode
+              key={`_${index.toString()}_${node.id}`}
+              dense={dense}
+              node={node}
+              isChecked={isChecked}
+            />
+          ))}
+        </TreeContext.Provider>
       </TreeStyled>
     </TreeContainer>
   )

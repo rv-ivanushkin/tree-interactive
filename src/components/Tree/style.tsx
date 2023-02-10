@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, ButtonProps, Paper, PaperProps, styled } from '@mui/material'
-import { TreeProps } from './types'
+import { TreeStyledProps } from './types'
 
 export const TreeContainer = styled('div')`
   position: relative;
@@ -65,11 +65,11 @@ export const TreeNodeHeaderStyled = styled(
   margin-bottom: 3px;
 
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto auto 1fr;
   grid-auto-columns: auto 1fr;
   justify-items: start;
 
-  & svg {
+  &:first-of-type > svg {
     transform: rotate(
       ${({ isShowChildren }) => (isShowChildren ? '90deg' : '0deg')}
     );
@@ -86,7 +86,7 @@ export const TreeStyled = styled(
     // eslint-disable-next-line react/jsx-props-no-spreading
     <Paper {...rest} />
   )
-)<TreeProps>`
+)`
   position: absolute;
   overflow-y: auto;
   overflow-x: auto;

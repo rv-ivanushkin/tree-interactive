@@ -2,8 +2,24 @@ export type ConnectorLineTypes = 'solid' | 'dashed'
 export type Dense = boolean
 export type ConnectorLineType = ConnectorLineTypes
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface TreeContextProps {}
+export interface TreeProps {
+  connectorLineType?: ConnectorLineType
+  dense?: Dense
+  nodes: TreeNode[]
+  filter?: string
+  isChecked?: boolean
+  checked?: string[]
+  expanded?: string[]
+  onChecked?: (checked: string[]) => void
+  onExpanded?: (expanded: string[]) => void
+}
+
+export interface TreeContextProps {
+  checked: string[]
+  setChecked: (checked: string[]) => void
+  expanded: string[]
+  setExpanded: (expanded: string[]) => void
+}
 
 export type TreeStyledProps = {
   connectorLineType?: ConnectorLineType
@@ -12,18 +28,12 @@ export type TreeStyledProps = {
 
 export interface TreeNode {
   label: string
-  id: string | number
+  id: string
   children?: TreeNode[]
 }
 
 export interface TreeNodeProps {
   node: TreeNode
   dense?: Dense
-}
-
-export interface TreeProps {
-  connectorLineType?: ConnectorLineType
-  dense?: Dense
-  nodes: TreeNode[]
-  filter?: string
+  isChecked?: boolean
 }

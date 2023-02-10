@@ -4,7 +4,7 @@ export const TreeControlStyled = styled(Paper)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto 1fr;
-  padding: 10px;
+  padding: 20px;
   gap: 10px;
   align-content: start;
 `
