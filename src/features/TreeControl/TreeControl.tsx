@@ -18,7 +18,7 @@ export const TreeControl = () => {
 
   const handleDense = () => setDense((prev) => !prev)
   const handleChangeLineType = (event: SelectChangeEvent) => {
-    setConnectorLineType(event.target.value)
+    setConnectorLineType(event.target.value as ConnectorLineType)
   }
 
   return (

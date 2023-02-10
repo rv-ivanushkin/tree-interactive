@@ -15,4 +15,5 @@ export interface TreeNodeProps {
 
 export interface TreeProps {
   connectorLineType?: ConnectorLineType
+  dense?: Dense
 }
