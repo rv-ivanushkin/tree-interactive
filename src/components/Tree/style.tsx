@@ -62,6 +62,8 @@ export const TreeNodeHeaderStyled = styled(
   text-transform: none;
   width: 100%;
 
+  margin-bottom: 3px;
+
   display: grid;
   grid-template-columns: auto 1fr;
   grid-auto-columns: auto 1fr;
