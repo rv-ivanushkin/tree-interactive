@@ -7,21 +7,24 @@ import {
   Typography,
   Divider,
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ConnectorLineType, Tree } from 'src/components/Tree'
 import { genDataItems } from 'src/utils'
+import debounce from 'lodash/debounce'
+
 import {
   OptionsStyled,
   TreeControlStyled,
   TreeOptionsControlStyled,
 } from './style'
 
-const nodes = genDataItems()
+const nodes = genDataItems(4)
 
 export const TreeControl = () => {
   const { t } = useTranslation()
   const [dense, setDense] = useState(false)
+  const [filter, setFilter] = useState('')
   const [connectorLineType, setConnectorLineType] =
     useState<ConnectorLineType>('dashed')
 
@@ -30,11 +33,31 @@ export const TreeControl = () => {
     setConnectorLineType(event.target.value as ConnectorLineType)
   }
 
+  const handleFilterChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFilter(event.target.value)
+  }
+
+  const handleFilterChangeDebounce = useMemo(
+    () => debounce(handleFilterChange, 1000),
+    []
+  )
+
   return (
     <TreeControlStyled>
-      <TextField size="small" label={t('filterPlaceholder')} />
+      <TextField
+        size="small"
+        label={t('filterPlaceholder')}
+        onChange={handleFilterChangeDebounce}
+      />
       <div />
-      <Tree nodes={nodes} dense={dense} connectorLineType={connectorLineType} />
+      <Tree
+        filter={filter}
+        nodes={nodes}
+        dense={dense}
+        connectorLineType={connectorLineType}
+      />
       <OptionsStyled>
         <Typography variant="h5">{t('optionsLabel')}</Typography>
         <Divider />

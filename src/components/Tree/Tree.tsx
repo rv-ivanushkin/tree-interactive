@@ -1,14 +1,23 @@
-import React from 'react'
-import { treeData } from 'src/constants'
+import React, { useEffect, useMemo, useState } from 'react'
+import { TreeContext } from './context'
 import { TreeContainer, TreeStyled } from './style'
 import { TreeNode } from './TreeNode'
 import { TreeProps } from './types'
+import { filterNodesByKey } from './utils'
 
 export const Tree = ({
   dense = false,
   connectorLineType = 'solid',
-  nodes,
+  nodes: defaultNodes,
+  filter = '',
 }: TreeProps) => {
+  const [nodes, setNodes] = useState(defaultNodes)
+
+  useEffect(() => {
+    setNodes(filter ? filterNodesByKey(defaultNodes, filter) : defaultNodes)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter])
+
   return (
     <TreeContainer>
       <TreeStyled

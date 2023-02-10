@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ArrowRightRoundedIcon from '@mui/icons-material/ArrowRightRounded'
 import { TreeNodeCollapse, TreeNodeHeaderStyled, TreeNodeStyled } from './style'
 import { TreeNodeProps } from './types'
+import { TreeContext } from './context'
 
 export const TreeNode = ({ node, dense }: TreeNodeProps) => {
   const sizeButton = dense ? 'small' : 'large'

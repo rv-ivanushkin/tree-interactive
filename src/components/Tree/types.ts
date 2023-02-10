@@ -1,7 +1,15 @@
 export type ConnectorLineTypes = 'solid' | 'dashed'
 export type Dense = boolean
 export type ConnectorLineType = ConnectorLineTypes
-export type TreeStyledProps = Omit<TreeProps, 'nodes'>
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface TreeContextProps {}
+
+export type TreeStyledProps = {
+  connectorLineType?: ConnectorLineType
+  dense?: Dense
+}
+
 export interface TreeNode {
   label: string
   id: string | number
@@ -17,4 +25,5 @@ export interface TreeProps {
   connectorLineType?: ConnectorLineType
   dense?: Dense
   nodes: TreeNode[]
+  filter?: string
 }
