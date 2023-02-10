@@ -4,7 +4,7 @@ import { TreeNodeCollapse, TreeNodeHeaderStyled, TreeNodeStyled } from './style'
 import { TreeNodeProps } from './types'
 
 export const TreeNode = ({ node, dense }: TreeNodeProps) => {
-  const sizeButton = dense ? 'large' : 'small'
+  const sizeButton = dense ? 'small' : 'large'
 
   const [isShowChildren, setIsShowChildren] = useState(false)
 

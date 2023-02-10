@@ -12,7 +12,6 @@ export const Tree = ({
     <TreeContainer>
       <TreeStyled
         elevation={0}
-        square
         variant="outlined"
         connectorLineType={connectorLineType}
       >

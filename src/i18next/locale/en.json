@@ -2,6 +2,8 @@
   "navigationPanel": {
     "title": "Tree - Interactive component Tree"
   },
+  "optionsLabel": "Options fro UI",
   "connectorLineType": "Connector line type",
-  "dense": "Internal indentation"
+  "dense": "Internal indentation",
+  "filterPlaceholder": "Enter a string to search through the tree..."
 }

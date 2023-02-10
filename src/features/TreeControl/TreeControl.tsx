@@ -3,12 +3,18 @@ import {
   Select,
   SelectChangeEvent,
   Switch,
+  TextField,
   Typography,
+  Divider,
 } from '@mui/material'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ConnectorLineType, Tree } from 'src/components/Tree'
-import { TreeControlStyled, TreeOptionsControlStyled } from './style'
+import {
+  OptionsStyled,
+  TreeControlStyled,
+  TreeOptionsControlStyled,
+} from './style'
 
 export const TreeControl = () => {
   const { t } = useTranslation()
@@ -23,20 +29,26 @@ export const TreeControl = () => {
 
   return (
     <TreeControlStyled>
+      <TextField size="small" label={t('filterPlaceholder')} />
+      <div />
       <Tree dense={dense} connectorLineType={connectorLineType} />
-      <TreeOptionsControlStyled>
-        <Typography>{t('connectorLineType')}</Typography>
-        <Select
-          size="small"
-          value={connectorLineType}
-          onChange={handleChangeLineType}
-        >
-          <MenuItem value="solid">solid</MenuItem>
-          <MenuItem value="dashed">dashed</MenuItem>
-        </Select>
-        <Typography>{t('dense')}</Typography>
-        <Switch value={dense} onChange={handleDense} />
-      </TreeOptionsControlStyled>
+      <OptionsStyled>
+        <Typography variant="h5">{t('optionsLabel')}</Typography>
+        <Divider />
+        <TreeOptionsControlStyled elevation={0}>
+          <Typography>{t('connectorLineType')}</Typography>
+          <Select
+            size="small"
+            value={connectorLineType}
+            onChange={handleChangeLineType}
+          >
+            <MenuItem value="solid">solid</MenuItem>
+            <MenuItem value="dashed">dashed</MenuItem>
+          </Select>
+          <Typography>{t('dense')}</Typography>
+          <Switch value={dense} onChange={handleDense} />
+        </TreeOptionsControlStyled>
+      </OptionsStyled>
     </TreeControlStyled>
   )
 }

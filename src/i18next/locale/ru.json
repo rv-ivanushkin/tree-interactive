@@ -2,6 +2,8 @@
   "navigationPanel": {
     "title": "Tree - Интерактивный компонент Tree"
   },
+  "optionsLabel": "Параметры отображения",
   "connectorLineType": "Тип соединительной линии",
-  "dense": "Внутренний отступ"
+  "dense": "Внутренний отступ",
+  "filterPlaceholder": "Введите строку для поиска по дереву..."
 }
