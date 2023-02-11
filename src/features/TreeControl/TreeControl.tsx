@@ -1,121 +1,86 @@
-import {
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  Switch,
-  TextField,
-  Typography,
-  Divider,
-} from '@mui/material'
-import React, { ChangeEvent, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ConnectorLineType, Tree } from 'src/components/Tree'
+import React, { memo, useState } from 'react'
+import { Tree } from 'src/components/Tree'
 import { genDataItems } from 'src/utils'
-import debounce from 'lodash/debounce'
 
+import { useTranslation } from 'react-i18next'
+import { Divider, MenuItem, Select, Switch, Typography } from '@mui/material'
 import {
   OptionsStyled,
   TreeControlStyled,
   TreeOptionsControlStyled,
 } from './style'
+import { Filter } from './Filter'
+import { OptionsNames, useOptions } from './hooks'
+import { HandleChange, LabelProps } from './types'
 
-const nodes = genDataItems(4)
+const nodes = genDataItems(5)
 
-const expandedOne = 'id-Node 1.1'
-const checkedOne = 'id-Node 1.1'
+// eslint-disable-next-line react/display-name
+export const Label = memo(({ label, ...props }: LabelProps) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Typography {...props}>{label}</Typography>
+))
 
 export const TreeControl = () => {
   const { t } = useTranslation()
-  const [checked, setChecked] = useState<string[]>(['id-Node 1.1'])
-  const [expanded, setExpanded] = useState<string[]>(['id-Node 1.1'])
-  const [dense, setDense] = useState(true)
-  const [isChecked, setIsChecked] = useState(true)
   const [filter, setFilter] = useState('')
-  const [connectorLineType, setConnectorLineType] =
-    useState<ConnectorLineType>('dashed')
 
-  const handleDense = () => setDense((prev) => !prev)
-  const handleCheck = (event: ChangeEvent<HTMLInputElement>, check: boolean) =>
-    setIsChecked(check)
-  const handleChangeLineType = (event: SelectChangeEvent) => {
-    setConnectorLineType(event.target.value as ConnectorLineType)
-  }
+  const { dense, isChecked, connectorLineType, updateOption } = useOptions({
+    isChecked: true,
+  })
 
-  const handleFilterChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFilter(event.target.value)
-  }
+  const handleChange: HandleChange = (event, checked) => {
+    const { name } = event.target
 
-  const handleExpandOne = () => {
-    if (expanded.includes(expandedOne)) {
-      setExpanded((prev) => prev.filter((id) => id !== expandedOne))
-    } else {
-      setExpanded((prev) => [...prev, 'id-Node 1.1'])
+    if (name) {
+      switch (event.target.name as OptionsNames) {
+        case 'connectorLineType': {
+          updateOption({
+            [event.target.name]: event.target.value,
+          })
+          break
+        }
+        default: {
+          updateOption({
+            [event.target.name]: checked,
+          })
+        }
+      }
     }
   }
-  const handleCheckedOne = () => {
-    if (checked.includes(checkedOne)) {
-      setChecked((prev) => prev.filter((id) => id !== checkedOne))
-    } else {
-      setChecked((prev) => [...prev, 'id-Node 1.1'])
-    }
-  }
-
-  const handleFilterChangeDebounce = useMemo(
-    () => debounce(handleFilterChange, 1000),
-    []
-  )
-
-  const handleCheckedTree = (ids: string[]) => setChecked(ids)
-  const handleExpandedTree = (ids: string[]) => setExpanded(ids)
 
   return (
     <TreeControlStyled>
-      <TextField
-        size="small"
-        label={t('filterPlaceholder')}
-        onChange={handleFilterChangeDebounce}
-      />
+      <Filter onChange={setFilter} />
       <div />
-      <Tree
-        isChecked={isChecked}
-        filter={filter}
-        nodes={nodes}
-        dense={dense}
-        connectorLineType={connectorLineType}
-        checked={checked}
-        expanded={expanded}
-        onChecked={handleCheckedTree}
-        onExpanded={handleExpandedTree}
-      />
+      <Tree filter={filter} nodes={nodes} dense={dense} isChecked={isChecked} />
       <OptionsStyled>
-        <Typography variant="h5">{t('optionsLabel')}</Typography>
+        <Label variant="h5" label={t('optionsLabel')} />
         <Divider />
         <TreeOptionsControlStyled elevation={0}>
-          <Typography>{t('connectorLineType')}</Typography>
+          <Label label={t('connectorLineType')} />
           <Select
+            name="connectorLineType"
             size="small"
             value={connectorLineType}
-            onChange={handleChangeLineType}
+            onChange={handleChange}
           >
             <MenuItem value="solid">solid</MenuItem>
             <MenuItem value="dashed">dashed</MenuItem>
           </Select>
-          <Typography>{t('dense')}</Typography>
-          <Switch value={dense} onChange={handleDense} />
-          <Typography>{t('isChecked')}</Typography>
-          <Switch checked={isChecked} onChange={handleCheck} />
-
-          <Typography>{t('checked')} (id-Node 1.1)</Typography>
+          <Label label={t('dense')} />
           <Switch
-            checked={checked.includes('id-Node 1.1')}
-            onChange={handleCheckedOne}
+            name="dense"
+            checked={dense}
+            value={dense}
+            onChange={handleChange}
           />
-          <Typography>{t('expanded')} (id-Node 1.1)</Typography>
+          <Label label={t('isChecked')} />
           <Switch
-            checked={expanded.includes('id-Node 1.1')}
-            onChange={handleExpandOne}
+            name="isChecked"
+            checked={isChecked}
+            value={isChecked}
+            onChange={handleChange}
           />
         </TreeOptionsControlStyled>
       </OptionsStyled>

@@ -1,12 +1,13 @@
-import React, { useContext, useMemo, useState } from 'react'
+import React from 'react'
 import ArrowRightRoundedIcon from '@mui/icons-material/ArrowRightRounded'
 import { Checkbox } from '@mui/material'
 import { TreeNodeCollapse, TreeNodeHeaderStyled, TreeNodeStyled } from './style'
 import { TreeNodeProps } from './types'
-import { TreeContext } from './context'
+import { useAppContext } from './hooks'
 
 export const TreeNode = ({ node, dense, isChecked }: TreeNodeProps) => {
-  const { checked, setChecked, expanded, setExpanded } = useContext(TreeContext)
+  const { checked, setChecked, expanded, setExpanded } = useAppContext()
+
   const sizeButton = dense ? 'small' : 'large'
   const sizeCheckbox = dense ? 'small' : 'medium'
 

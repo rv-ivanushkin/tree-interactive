@@ -1,9 +1,10 @@
+import { isNull } from 'lodash'
 import React, { useEffect, useMemo, useState } from 'react'
 import { TreeContext } from './context'
 import { TreeContainer, TreeStyled } from './style'
 import { TreeNode } from './TreeNode'
 import { TreeProps } from './types'
-import { filterNodesByKey } from './utils'
+import { filterNodesByKey, getAllIds } from './utils'
 
 export const Tree = ({
   dense = false,
@@ -11,21 +12,25 @@ export const Tree = ({
   nodes: defaultNodes,
   filter = '',
   isChecked = false,
-  checked: defaultChecked = [],
-  expanded: defaultExpanded = [],
+  checked: defaultChecked,
+  expanded: defaultExpanded,
   onChecked,
   onExpanded,
 }: TreeProps) => {
   const [nodes, setNodes] = useState(defaultNodes)
-  const [checked, setChecked] = useState<string[]>(defaultChecked)
-  const [expanded, setExpanded] = useState<string[]>(defaultExpanded)
+  const [checked, setChecked] = useState<string[]>([])
+  const [expanded, setExpanded] = useState<string[]>([])
 
   useEffect(() => {
-    setChecked(defaultChecked)
+    if (defaultChecked) {
+      setChecked(defaultChecked)
+    }
   }, [defaultChecked])
 
   useEffect(() => {
-    setExpanded(defaultExpanded)
+    if (defaultExpanded) {
+      setExpanded(defaultExpanded)
+    }
   }, [defaultExpanded])
 
   useEffect(() => {
@@ -54,7 +59,9 @@ export const Tree = ({
   )
 
   useEffect(() => {
-    setNodes(filter ? filterNodesByKey(defaultNodes, filter) : defaultNodes)
+    setNodes(
+      filter !== '' ? filterNodesByKey(defaultNodes, filter) : defaultNodes
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter])
 

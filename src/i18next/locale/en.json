@@ -8,5 +8,6 @@
   "filterPlaceholder": "Enter a string to search through the tree...",
   "isChecked": "Ability to select an item",
   "checked": "Choose one of the Nodes",
-  "expanded": "Open one of the Nodes"
+  "expanded": "Open one of the Nodes",
+  "expandAll": "Open all Nodes"
 }
