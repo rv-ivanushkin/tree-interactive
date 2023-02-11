@@ -4,7 +4,7 @@ export const TreeControlStyled = styled(Paper)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto 1fr;
-  padding: 20px;
+  padding: 10px;
   gap: 10px;
   align-content: start;
 `
@@ -16,6 +16,7 @@ export const TreeOptionsControlStyled = styled(Paper)`
   justify-content: start;
   align-items: center;
   gap: 10px;
+  padding: 10px;
 `
 export const OptionsStyled = styled('div')`
   display: grid;
