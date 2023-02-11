@@ -2,13 +2,6 @@
 
 it's a project for understanding how to develop react interactive tree without helped from other libs.
 
-<p align="center">
-  <img src="./docs/screenshots/ui_dark.png" alt="drawing"/>
-</p>
-<p align="center">
-  <img src="./docs/screenshots/ui_light.png" alt="drawing"/>
-</p>
-
 # What's us need for create tree component?
 
 Of course, the first stage is searching examples:
