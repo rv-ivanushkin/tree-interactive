@@ -14,3 +14,15 @@ export const genDataItems = (
     children: genDataItems(depth - 1, childrenCount, `${label}.${index + 1}`),
   }))
 }
+
+export const getAllIds = (nodes: TreeNode[]) => {
+  let result: string[] = []
+  for (let i = 0; i < nodes.length; i += 1) {
+    const current = nodes[i]
+    if (Array.isArray(current.children)) {
+      result.push(current.id)
+      result = result.concat(getAllIds(current.children))
+    }
+  }
+  return result
+}

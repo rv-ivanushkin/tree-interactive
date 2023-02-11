@@ -37,3 +37,15 @@ export interface TreeNodeProps {
   dense?: Dense
   isChecked?: boolean
 }
+
+export interface UseTreeNodesProps {
+  nodes: TreeNode[]
+  filter?: string
+}
+
+export interface UseTreeNodeStateProps {
+  checked?: string[]
+  expanded?: string[]
+  onChecked?: (checked: string[]) => void
+  onExpanded?: (expanded: string[]) => void
+}
